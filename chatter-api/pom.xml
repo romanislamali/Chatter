@@ -8,11 +8,11 @@
 		<version>3.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com</groupId>
-	<artifactId>chatter</artifactId>
+	<groupId>com.roman</groupId>
+	<artifactId>chatter-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>chatter</name>
-	<description>Demo project for Spring Boot</description>
+	<name>chatter-api</name>
+	<description>Chat application</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -30,6 +30,10 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
