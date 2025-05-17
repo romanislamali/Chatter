@@ -1,6 +1,6 @@
 
 <div class="chat-container">
-  <div class="chat-header">
+  <div class="chat-header" #chatContainer>
     <h2>💬 Chatter</h2>
   </div>
 
@@ -8,11 +8,11 @@
     <div
       *ngFor="let msg of messages"
       [ngClass]="{'sent': msg.sender === sender, 'received': msg.sender !== sender}">
-      <div class="message-content">
-        {{ msg.content }}
+      <div class="message-content" style="color: rgb(131, 191, 231);">
+        {{ msg.sender }}
       </div>
       <div class="message-meta">
-        <span class="user">{{ msg.sender }}</span>
+        <span class="user">{{ msg.content }}</span>
         <span class="timestamp">{{ msg.timestamp | date: 'shortTime' }}</span>
       </div>
     </div>
@@ -25,6 +25,5 @@
     <button (click)="send()" class="send-button">➤</button>
   </div>
 </div>
-
 
 <router-outlet />

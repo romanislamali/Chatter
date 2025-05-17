@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ChatService } from './service/chat.service';
 import { FormsModule } from '@angular/forms';
@@ -12,18 +12,19 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
+
+  @ViewChild('chatContainer') chatContainer!: ElementRef;
+
   messages: any[] = [];
   sender: string = 'Roman';
   receiver: string = 'Bob';
   content: string = '';
 
-  constructor(private chatService: ChatService) {}
+  constructor(private chatService: ChatService) { }
 
   ngOnInit(): void {
-    this.chatService.connect();
-
-    this.chatService.onMessage().subscribe(msg => {
-      this.messages.push(msg);
+    this.chatService.messages$.subscribe(data => {
+      this.messages = data;
     });
   }
 
@@ -35,6 +36,15 @@ export class AppComponent implements OnInit {
         content: this.content
       });
       this.content = '';
+      this.scrollToBottom();
     }
   }
+
+  scrollToBottom(): void {
+    setTimeout(() => {
+      const el = this.chatContainer?.nativeElement;
+      if (el) el.scrollTop = el.scrollHeight;
+    }, 100);
+  }
+
 }
